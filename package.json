@@ -1,8 +1,11 @@
 {
   "name": "swapi-vue",
-  "private": true,
-  "version": "0.0.0",
+  "description": "",
+  "version": "1.0.0",
   "type": "module",
+  "keywords": ["SWAPI", "Vue", "Vite"],
+  "author": "Daniel Luciano Villalba",
+  "license": "ISC",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
