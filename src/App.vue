@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-import PWABadge from './components/PWABadge.vue'
 </script>
 
 <template>
@@ -13,7 +12,6 @@ import PWABadge from './components/PWABadge.vue'
     </a>
   </div>
   <HelloWorld msg="Swapi-vue" />
-  <PWABadge />
 </template>
 
 <style scoped>
