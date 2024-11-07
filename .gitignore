@@ -24,3 +24,4 @@ src/components/PWABadge.vue
 *.sln
 *.sw?
 *.pem
+vite.local.ts
