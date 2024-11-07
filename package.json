@@ -1,6 +1,6 @@
 {
   "name": "swapi-vue",
-  "description": "",
+  "description": "A project to show a gallery of the information star war movie",
   "version": "1.0.0",
   "type": "module",
   "keywords": ["SWAPI", "Vue", "Vite"],
