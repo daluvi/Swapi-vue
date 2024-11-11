@@ -9,7 +9,7 @@ import ViteLocalConfig from './vite.local';
 export default defineConfig({
   resolve: {
     alias: [
-      { find: '@utils/*', replacement: fileURLToPath(new URL('./src/utils/*', import.meta.url)) },
+      { find: '@utils', replacement: fileURLToPath(new URL('./src/utils', import.meta.url)) },
     ],
   },
   plugins: [vue(),
