@@ -1,0 +1,148 @@
+
+@use "sass:string";
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+@function str-remove-whitespace($str) {
+  @while (string.index($str, ' ') != null) {
+    $index: string.index($str, ' ');
+    $str: "#{string.slice($str, 0, $index - 1)}#{string.slice($str, $index + 1)}";
+  }
+  @return $str;
+}
+
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+@function get-property($rule) {
+  @if meta.type-of($rule) == 'string' {
+    $rule: str-replace($rule, ';');
+    @return list.nth(string.split($rule, ':'), 1);
+  } @else {
+    @return null;
+  }
+}
+
+@function get-value($rule) {
+  @if meta.type-of($rule) == 'string' {
+    $rule: str-replace($rule, ';');
+    @return list.nth(string.split($rule, ':'), 2);
+  } @else {
+    @return null;
+  }
+}
+
+@function get-instruction($value) {
+  @if string.index($value, "[") != null {
+    $value: str-replace($value, "[");
+    $value: str-replace($value, "]");
+    @return $value;
+  } @else {
+    @return null;
+  }
+}
+
+@function destructuring-map($map, $preComposition: '', $attrName: '') {
+  $list: ();
+  $instruction: get-instruction($attrName);
+  
+  $composition: '';
+  @if $instruction != null {
+    $list: list.append($list, ($instruction, destructuring-map($map, $preComposition)));
+  } @else {
+    @if $attrName == '' {
+      $composition: #{$preComposition};
+    } @else {
+      $composition: #{$preComposition+'-'+$attrName};  
+    }
+
+    @each $name, $value in $map {    
+      @if meta.type-of($map) == 'map' {
+        $list: list.join($list, destructuring-map($value, $composition, $name));
+      } @else {
+        $list: list.append($list, ('-'+#{$composition}, $map));
+      };
+    }
+  }
+
+  @return $list;
+}
+
+@function GV($map: (), $expression: '') {
+  // purpose: get a value of map sass
+  // EX: 
+  //    $root: (
+  //      '[theme:default]': (
+  //        color: (
+  //          first: black,
+  //        ),
+  //      ),
+  //    );
+  //    $result: GV($root, "[theme:default].color.first");
+  //    @debug $result; --> black
+  $list: string.split($expression, '.');
+
+  @if list.length($list) > 1 {
+    @each $v in $list {
+      $map: GV($map, $v);
+    }
+  } @else {
+    @return map.get($map, $expression);
+  }
+  
+  @return $map;
+}
+
+@mixin print-declaration($value) {
+  @each $n, $v in $value {
+    @if string.index($n, ':'){
+      $p: get-property($n);
+      $w: get-value($n);
+      @if $p == 'functions'  {
+        @each $m, $x in $v {
+          #{$m}: #{$w}($x)
+        }
+      }
+    } @else {
+      #{$n}: #{$v};
+    }
+  }
+}
+
+@mixin create-roots($map) {
+  $values: destructuring-map($map);
+  $list: ();
+  @each $name, $value in $values {
+    @if string.index($name, ':'){
+      $prop: get-property($name);
+      $val: get-value($name);
+      @if $prop == 'theme' {
+        @if $val != 'default' {
+          :root[theme=#{$val}] {  
+            @include print-declaration($value);
+          }
+        } @else {
+          :root {
+            @include print-declaration($value);
+          }
+        }
+      }
+    } @else {
+      $list: list.append($list, (#{$name} #{$value}));
+    }
+  }
+  @if list.length($list) > 0 {
+    :root {
+      @each $name, $value in $list {
+        #{$name}: #{$value}
+      }
+    }
+  }
+}
+
