@@ -2,7 +2,7 @@ type Star = {x:number, y: number, z: number}
 
 const initialStarts = () => {
   const canvas: HTMLCanvasElement = document.getElementById("animationStar") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   canvas.width = window.outerWidth;
   canvas.height = window.outerHeight;

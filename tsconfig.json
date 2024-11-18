@@ -5,9 +5,17 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "types": ["vue-router"],
 
     "paths": {
+      "@typings/*": ["./src/typings/*"],
+      "@components/*": ["./src/components/*"],
       "@utils/*": ["./src/utils/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@composables/*": ["./src/composables/*"],
+      "@store/*": ["./src/store/*"],
+      "@service/*": ["./src/service/*"],
+      "@pages/*": ["./src/pages/*"],
     },
 
     /* Bundler mode */
@@ -24,6 +32,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.scss"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

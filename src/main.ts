@@ -1,8 +1,15 @@
 import { createApp } from 'vue'
+import { createPinia } from "pinia";
 
 import "@utils/animationStar";
 
 import './style.scss'
+import router from './router';
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const pinia = createPinia()
+
+createApp(App)
+  .use(pinia)
+  .use(router)
+  .mount('#app')
