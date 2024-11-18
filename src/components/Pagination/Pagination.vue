@@ -1,32 +1,18 @@
 <script setup lang="ts">
-  import { computed, ComputedRef, ref, watch, watchEffect } from "vue";
+  import { computed, ComputedRef } from "vue";
   import { storeToRefs } from "pinia";
   import { RouterLink, useRoute } from "vue-router";
   import {isUndefined} from "underscore";
 
   import {useInfoStore} from "@store/index";
-  import {addActiveClass} from "@utils/util";
   import {MAX_RESULT_PER_PAGE} from "@utils/constants";
-
 
   const route = useRoute();
   const id = computed(() => route.params.id as string);
   const store = useInfoStore();
   const {count, next, previous} = storeToRefs(store);
-  console.log('PAGINATION count: ', count.value);
-  console.log('PAGINATION next: ', next.value);
-  console.log('PAGINATION previous: ', previous.value);
+
   let quantityPage: ComputedRef<number> = computed(() => Math.ceil(count.value / MAX_RESULT_PER_PAGE));
-
-  
-
-  console.log('PAGINATION !isUndefined(id) && !!previous: ', !isUndefined(id) && !!previous);
-  console.log('PAGINATION !!previous: ', !!previous);
-  console.log('PAGINATION !!next: ', !!next);
-
-
-  console.log('PAGINATION quantityPage:', quantityPage);
-  console.log('PAGINATION !!quantityPage: ', !!quantityPage)
 </script>
 
 <template>
