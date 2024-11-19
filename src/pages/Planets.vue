@@ -29,8 +29,10 @@
 
 <template>
   <Header />
-  <article v-if="info?.length > 0">
-    <CardPlanets v-for="(planet, index) in (info as D.PlanetsState[])" :key="planet.name" :item="planet" :id="`Card${index}`" />
+  <article>
+    <template v-if="info?.length > 0">
+      <CardPlanets v-for="(planet, index) in (info as D.PlanetsState[])" :key="planet.name" :item="planet" :id="`Card${index}`" />
+    </template>
   </article>
   <Footer />
 </template>

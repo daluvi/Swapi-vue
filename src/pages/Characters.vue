@@ -28,8 +28,10 @@
 
 <template>
   <Header />
-  <article v-if="info?.length > 0">
-    <CardCharacter v-for="(character, index) in (info as D.CharacterState[])" :key="character.name" :item="character" :id="`Card${index}`" />
+  <article>
+    <template v-if="info?.length > 0">
+      <CardCharacter v-for="(character, index) in (info as D.CharacterState[])" :key="character.name" :item="character" :id="`Card${index}`" />
+    </template>
   </article>
   <Footer />
 </template>
