@@ -4,18 +4,27 @@
 
   import Pagination from "@components/Pagination/Pagination.vue";
   import {changeOpenNavigation, getUrlPath, onChangeTheme} from "@utils/util";
+  import {useInfoStore} from "@store/index";
 
   import starWarIcon from '/icons/android-icon-36x36.png';
-
+  const store = useInfoStore();
+  
+  const { saveDataPagination, clearInfo } = store;
+  
   const location = useRoute();
   const currentPath = getUrlPath(location.path);
-
+  const cleanStore = () => {
+    clearInfo();
+    saveDataPagination({count: 0, next: null, previous: null})
+  }
 </script>
 
 <template>
   <header>
     <button type="button" className="openNav" @click="() => changeOpenNavigation()" ><span className="icon-hamburger"></span></button>
-    <RouterLink className="homeLink" to="/" ><img :src="starWarIcon" alt="Home" /></RouterLink>
+    <RouterLink className="homeLink" to="/" @click="() => cleanStore()" >
+      <img :src="starWarIcon" alt="Home" />
+    </RouterLink>
     <div class="navigation">
       <nav :class="`pages ${isUndefined(currentPath)? 'disabled': ''}`">
         <RouterLink to="/people/1" :class="currentPath === 'people'? 'disabled': ''">People</RouterLink>

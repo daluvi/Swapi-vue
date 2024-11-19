@@ -139,12 +139,12 @@ const useGettingInfo = () => {
   );
 
   const getInfo = async <TypeRes extends ResponseGroup>(url: string): Promise<void> => {
+    clearInfo();
     setIsLoading(true);
     const response = await gettingData<TypeRes>(url);
     const processedResult = await processDetails(response.results);
     const data = {...response, results: processedResult};
       saveDataPagination({count: data.count, next: data.next, previous: data.previous});
-      clearInfo();
       data.results.map((result) => {
         const id = getId(result.url);
         saveInfo([{...result, id}] as unknown as D.StateGroup[]);  
