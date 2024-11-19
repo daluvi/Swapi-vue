@@ -12,7 +12,7 @@
   const onErrorImg: InfoExtra.OnErrorImg = (e) => {
     e.currentTarget.src = `${BASE_URL_IMG}/placeholder.jpg`;
   };
-  // console.log("[INFO EXTRA] info: ", info[0], hasValue(info[0]));
+
 </script>
 
 <template>

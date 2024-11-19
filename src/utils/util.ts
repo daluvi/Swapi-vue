@@ -138,11 +138,10 @@ export const onChangeTheme: U.OnChangeTheme = (e) => {
 
 export const openFlip: U.OpenFlip = (e, id) => {
   e.preventDefault();
-  console.log("openFlip -> id: ", id);
+
   const allFlipElements = document.querySelectorAll(`.flip-card .inner`);
   const currentElement = document.querySelector(`#${id} .flip-card .inner`);
-  console.log("openFlip -> allFlipElements: ", allFlipElements)
-  console.log("openFlip -> currentElement: ", currentElement)
+
   allFlipElements.forEach((item) => {
     item?.classList.remove('flip');
   });

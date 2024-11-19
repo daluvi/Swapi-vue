@@ -143,7 +143,6 @@ const useGettingInfo = () => {
     const response = await gettingData<TypeRes>(url);
     const processedResult = await processDetails(response.results);
     const data = {...response, results: processedResult};
-      console.log("getInfo -> data:", data);
       saveDataPagination({count: data.count, next: data.next, previous: data.previous});
       clearInfo();
       data.results.map((result) => {

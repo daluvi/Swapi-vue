@@ -4,8 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import ViteLocalConfig from './vite.local';
-// console.log(fileURLToPath(new URL('./src', import.meta.url)));
-console.log(fileURLToPath(new URL("./src/sass/", import.meta.url)));
+
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {

@@ -27,7 +27,7 @@ const sectionPath =
   isSpecies ? 'species' :
   isStarships ? 'starships' :
   isVehicles ? 'vehicles' : null;
-console.log("[CARD] id: ", id);
+
 </script>
 
 <template>

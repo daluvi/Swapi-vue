@@ -20,7 +20,6 @@ export const useInfoStore = defineStore('info', () => {
   };
 
   function saveDataPagination(payload: PayloadPagination) {
-    console.log('[STORE] saveDataPagination -> payload',payload);
     count.value = payload.count;
     next.value = payload.next;
     previous.value = payload.previous;
