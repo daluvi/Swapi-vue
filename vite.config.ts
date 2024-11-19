@@ -58,8 +58,8 @@ export default defineConfig({
       },
 
       manifest: {
-        id: "./",
-        start_url: "./",
+        id: "/",
+        start_url: "/",
         theme_color: "black",
         orientation: "landscape",
         background_color: "black",
@@ -145,23 +145,6 @@ export default defineConfig({
             form_factor: "narrow",
             label: "Wonder Widgets",
             platform: "android",
-          },
-        ],
-      },
-
-      workbox: {
-        runtimeCaching: [
-          {
-            handler: "CacheFirst" as const,
-            urlPattern: ({ url }) => {
-              return url.pathname.startsWith("/api");
-            },
-            options: {
-              cacheName: "starsWarCache",
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
           },
         ],
       },
