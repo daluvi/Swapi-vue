@@ -7,6 +7,13 @@ import ViteLocalConfig from './vite.local';
 
 // https://vite.dev/config/
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
   resolve: {
     alias: [
       {

@@ -30,7 +30,7 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '../../sass/media-queries';
+  @use '../../sass/media-queries';
 
   .paginationNav {
     display: flex; 
@@ -48,7 +48,7 @@
         border-color: var(--nav-link-col-b_act); 
         background-color: var(--nav-link-col-bg_act);
       }
-      @include mouseMedia {
+      @include media-queries.mouseMedia {
         &:hover {color: var(--nav-link-col_hov); border-color: var(--nav-link-col-b_hov); background-color: var(--nav-link-col-bg_hov);}
       }
       &.disabled{
@@ -74,7 +74,7 @@
             border-left-width: 0px;
           }
         }
-        @include mouseMedia {
+        @include media-queries.mouseMedia {
           &:hover {
             border-right-width: 1px;
             &+a{
